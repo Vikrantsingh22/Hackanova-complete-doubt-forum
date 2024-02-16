@@ -131,12 +131,12 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-
+import { useNavigate } from 'react-router-dom'
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+  const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -157,6 +157,10 @@ const LoginForm = () => {
 
       // Assuming the cookie is returned in the response headers
       const cookie = response.headers["set-cookie"];
+
+
+
+navigate('/index')
       // Handle the cookie (e.g., store it in local storage or cookie storage)
 
       // Handle successful login (e.g., redirect to another page)

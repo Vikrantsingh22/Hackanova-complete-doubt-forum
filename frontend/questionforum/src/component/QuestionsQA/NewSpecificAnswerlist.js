@@ -10,11 +10,11 @@ function NewSpecificAnswerList({ redirectData }) {
   }, [redirectData]);
 
   return (
-    <div>
+    <div className="hover:cursor-pointer hover:opacity-75 w-[80%] p-3 rounded-xl border bg-card text-card-foreground shadow-lg my-3">
       <div className="actualanswer">
         <div>
-          <p> Answer:{specificAnswer?.answerString}</p>
-          <p>UserName:{specificAnswer?.user_id?.username}</p>
+          <p className="text-lg font-bold">{specificAnswer?.answerString}</p>
+          <p className="text-end text-md">Answered by :{specificAnswer?.user_id?.username}</p>
         </div>
 
         {/* <div>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { redirect } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
+import { ChevronRight, Home } from "lucide-react";
 import NewSpecificAnswerList from "./NewSpecificAnswerlist";
 import AddAnswer from "./AddAnswer";
 
@@ -34,48 +35,58 @@ function Answer({ redirectData }) {
   }, [questionObjectID]); // Run this effect whenever questionObjectID changes
 
   return (
-    <div>
+    <>
+    <div className="flex w-[80%] mx-auto my-5 px-5 justify-end">
+        <Link to={"/index"}><Home/></Link>
+      </div>
+
+    <div className="hover:cursor-pointer hover:opacity-75 w-[80%] p-3 rounded-xl border bg-card text-card-foreground shadow-lg mx-auto mb-10">
       {/* {/* <div className="answersList">
         answer_id={specificQuestion.questionString}
       </div> */}
       {/* hello */}
-      <div className="Question-title">
-        {specificQuestion?.questionString}
-        <div>created by={specificQuestion?.user_id?.username}</div>
-        <div>At={specificQuestion?.createdAt}</div>
+      <div className="w-full hover:cursor-pointer hover:opacity-75 p-3 rounded-xl border bg-card text-card-foreground shadow-lg">
+        <div className="flex justify-between border-b pb-2 mb-2">
+          <p>
+            <span className="font-bold">Q.</span>{" "}
+            {specificQuestion?.questionString}
+          </p>
+          <div className="flex gap-3">
+            <p className="md:block hidden">
+              {specificQuestion?.user_id?.username}
+            </p>
+            <ChevronRight />
+          </div>
+        </div>
+
+        <div className="flex justify-between text-sm">
+          <div className="text-sm">
+            Doubt posted by={specificQuestion?.user_id?.username}
+          </div>
+          <div>on the {specificQuestion?.createdAt}</div>
+        </div>
       </div>
-      <div className="Answer-Block">
-        <div className="answer">
-          {/* {click ? (
-          <div className="answer-container">
-            <p>
-              answer=
-              {specificQuestion.answer_id?.map((_q, index) => (
-                <div key={index} className="question-internal">
-                  <Answer redirectData={_q} />
-                </div>
-              ))}
+
+      <div className="Question-title"></div>
+      <div className=" py-2">
+        <div>
+          <p>
+            <p className="text-end pr-3">
+            No. of Answers : {specificQuestion?.answer_id?.length}
             </p>
-          </div>
-        ) : (
-          ""
-        )} */}
-          <div>
-            <p>
-              answer=
-              {specificQuestion?.answer_id?.map((_q, index) => (
-                <div key={index} className="answer-internal">
-                  <NewSpecificAnswerList redirectData={_q} />
-                </div>
-              ))}
-            </p>
-          </div>
-          <div>
-            <AddAnswer questionId={questionObjectID} />
-          </div>
+            {specificQuestion?.answer_id?.map((_q, index) => (
+              <div key={index} className="answer-internal">
+                <NewSpecificAnswerList redirectData={_q} />
+              </div>
+            ))}
+          </p>
+        </div>
+        <div>
+          <AddAnswer questionId={questionObjectID} />
         </div>
       </div>
     </div>
+    </>
   );
 }
 

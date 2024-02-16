@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react"
 import Answer from "./Answer";
 import { Link } from "react-router-dom";
 
@@ -31,10 +32,9 @@ function QuestionALL({ redirectData }) {
     setClick(!click);
   };
   return (
-    <div className="big-container">
+    <div className="">
       <div className="question-title">
-        <p>id={specificQuestion._id}</p>
-        <br></br>
+        {/* <p>id={specificQuestion._id}</p> */}
         {/* {click ? (
           <div className="answer-container">
             <p>
@@ -49,12 +49,20 @@ function QuestionALL({ redirectData }) {
         ) : (
           ""
         )} */}
+        {console.log(specificQuestion._id)}
         <button
           onClick={() => {
             onClickbutton(specificQuestion._id);
           }}
+          className="w-full hover:cursor-pointer hover:opacity-75 p-3 rounded-xl border bg-card text-card-foreground shadow-lg"
         >
-          <p>title={specificQuestion.questionString}</p>
+          <div className="flex justify-between ">
+          <p><span className="font-bold">Q.</span> {specificQuestion.questionString}</p>
+          <div className="flex gap-3">
+            <p className="md:block hidden">{specificQuestion?.user_id?.username}</p>
+          <ChevronDown/>
+          </div>
+          </div>
         </button>
       </div>
     </div>
